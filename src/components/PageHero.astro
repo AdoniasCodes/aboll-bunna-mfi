@@ -1,0 +1,18 @@
+---
+import { u } from '../lib/url';
+interface Props { title: string; intro: string; crumbs?: { name: string; path: string }[] }
+const { title, intro, crumbs = [] } = Astro.props;
+---
+<section class="page-hero">
+  <div class="wrap">
+    {crumbs.length > 0 && (
+      <nav aria-label="Breadcrumb" class="crumbs">
+        <a href={u('/')}>Home</a>
+        {crumbs.map((c, i) => (i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={u(c.path)}>{c.name}</a>))}
+      </nav>
+    )}
+    <h1>{title}</h1>
+    <p class="lede">{intro}</p>
+    <slot />
+  </div>
+</section>

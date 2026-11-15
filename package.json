@@ -1,0 +1,22 @@
+{
+  "name": "aboll-bunna-mfi",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check:emdash": "python3 ../../scripts/check-emdash.py dist",
+    "preview": "astro preview"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
+    "astro": "^7.4.12",
+    "sharp": "^0.35.5"
+  }
+}

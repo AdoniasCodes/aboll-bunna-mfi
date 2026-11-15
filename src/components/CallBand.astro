@@ -1,0 +1,18 @@
+---
+import { org } from '../data/site';
+import { u } from '../lib/url';
+interface Props { title: string; text: string }
+const { title, text } = Astro.props;
+---
+<section class="call-band">
+  <div class="wrap call-inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="call-actions">
+      <a class="btn" href={`tel:${org.phones[0].tel}`}>Call {org.phones[0].display}</a>
+      <a class="btn btn-ghost" href={u('/contact/')}>Find a branch</a>
+    </div>
+  </div>
+</section>

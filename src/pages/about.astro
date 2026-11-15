@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Results from '../components/Results.astro';
+import Faq from '../components/Faq.astro';
+import CallBand from '../components/CallBand.astro';
+import farmer from '../assets/img/agriculture-tea-farmer.webp';
+import { org, mission, vision, principles } from '../data/site';
+
+const crumbs = [{ name: 'About us', path: '/about/' }];
+---
+<Base
+  title="About Aboll Bunna Microfinance S.C. | Our Story and Mission"
+  description="Aboll Bunna Microfinance S.C. is an NBE-licensed MFI (MFI/066/2024) serving women, youth and farmers from six branches in Addis Ababa and Amhara."
+  path="/about/"
+  crumbs={crumbs}
+  faq
+>
+  <PageHero title="About Aboll Bunna Microfinance" intro="The story behind Aboll Bunna Microfinance S.C. and the people committed to transforming lives." crumbs={crumbs} />
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="prose">
+        <h2>Our background</h2>
+        <p>Aboll Bunna Microfinance S.C. was founded with a vision to empower individuals and communities by providing innovative financial services tailored to their needs. Our journey began with a mission to create economic opportunities for those underserved by traditional banking systems, focusing on women, youth, and farmers in both urban and rural settings.</p>
+        <p>Since our inception, we have been dedicated to fostering economic growth, enhancing financial literacy, and promoting sustainable development. By leveraging technology and a team of highly motivated professionals, we strive to deliver exceptional services that make a tangible difference in the lives of our clients.</p>
+        <p>We received our microfinance license (No. {org.license}) from the National Bank of Ethiopia on 16 April 2024 under Proclamation No. 626/2009, as amended by Proclamation No. 1164/2019. Today we serve customers from six branches: {org.branches.join(', ')}.</p>
+        <p>We are moving our services onto a shared core banking system together with 45 other microfinance institutions, and are preparing to launch mobile and internet banking.</p>
+      </div>
+      <Image src={farmer} alt="Smiling woman farmer in a green tea field" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 90vw" class="rounded-photo" />
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="wrap three-col">
+      <div><h2>Vision</h2><p>{vision}</p></div>
+      <div><h2>Mission</h2><p>{mission}</p></div>
+      <div><h2>Principles</h2><ul class="ticks">{principles.map((p) => <li>{p}</li>)}</ul></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>Company details</h2>
+      <dl class="facts">
+        <dt>Legal name</dt><dd>{org.name} (<span lang="am">{org.nameAm}</span>)</dd>
+        <dt>Type</dt><dd>Share company engaged in microfinance</dd>
+        <dt>NBE license</dt><dd>{org.license}</dd>
+        <dt>Trade registration</dt><dd>{org.tradeReg}</dd>
+        <dt>Subscribed capital</dt><dd>ETB 98,100,000</dd>
+        <dt>Paid-up capital</dt><dd>ETB 50,800,000</dd>
+        <dt>Head office</dt><dd>{org.address.line}, {org.address.area}, {org.address.city}</dd>
+      </dl>
+      <h2>Beyond financial services</h2>
+      <p>Our commitment extends beyond financial services. We believe in creating lasting change by empowering individuals to achieve their dreams and transform their lives. During the 2025/2026 fiscal year we supported families in need in Kirkos Sub-City over the Ethiopian Christmas holiday.</p>
+    </div>
+  </section>
+
+  <Results />
+  <Faq />
+  <CallBand title="Join the Aboll Bunna community" text="Become a customer or learn more about becoming a shareholder. Call us or visit the head office behind Dembel City Center." />
+</Base>

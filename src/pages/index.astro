@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Results from '../components/Results.astro';
+import Faq from '../components/Faq.astro';
+import CallBand from '../components/CallBand.astro';
+import hero from '../assets/img/hero-coffee-farmer.webp';
+import { org, services, mission, vision, principles } from '../data/site';
+import { u } from '../lib/url';
+
+const latest = (await getCollection('articles')).sort((a, b) => +b.data.date - +a.data.date)[0];
+---
+<Base
+  title="Aboll Bunna Microfinance | Loans and Savings in Addis Ababa"
+  description="Licensed microfinance in Addis Ababa and Amhara with six branches. Loans for business, farming and housing, plus saving accounts. Call +251 11 558 2258."
+  path="/"
+  faq
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="hero-am" lang="am">አቦል ቡና ማይክሮ ፋይናንስ</p>
+        <h1>Microfinance in Addis Ababa for women, youth and farmers</h1>
+        <p class="lede">Aboll Bunna Microfinance S.C. gives small businesses, farmers and families the loans, savings and training they need to grow. Licensed by the National Bank of Ethiopia.</p>
+        <div class="hero-actions">
+          <a class="btn" href={`tel:${org.phones[0].tel}`}>Call {org.phones[0].display}</a>
+          <a class="btn btn-ghost" href={u('/loan-services/')}>See our loans</a>
+        </div>
+      </div>
+      <figure class="bean">
+        <Image src={hero} alt="Ethiopian coffee farmer harvesting red coffee cherries" widths={[420, 640, 900]} sizes="(min-width: 900px) 45vw, 90vw" loading="eager" fetchpriority="high" />
+      </figure>
+    </div>
+  </section>
+
+  {latest && (
+    <aside class="notice" aria-label="Latest notice">
+      <div class="wrap notice-inner">
+        <span class="notice-tag">Shareholder notice</span>
+        <a href={u(`/articles/${latest.id}/`)} lang="am">{latest.data.title}</a>
+      </div>
+    </aside>
+  )}
+
+  <section class="section" aria-labelledby="svc-h">
+    <div class="wrap">
+      <h2 id="svc-h">Loans, savings and training under one roof</h2>
+      <p class="section-intro">We offer a wide range of financial services built for people the big banks often overlook.</p>
+      <div class="svc-grid">
+        {services.map((s) => (
+          <a class="svc" href={u(s.href)}>
+            <Image src={s.img} alt="" widths={[400, 700]} sizes="(min-width: 900px) 30vw, 90vw" />
+            <h3>{s.name}</h3>
+            <p>{s.text}</p>
+            <span class="svc-cta">{s.cta}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-split" aria-labelledby="about-h">
+    <div class="wrap split">
+      <div>
+        <h2 id="about-h">Together we thrive</h2>
+        <p>Welcome to Aboll Bunna Microfinance S.C., where we are dedicated to fostering economic and social growth through innovative financial products and services. Our mission is to empower communities, especially women, youth, and farmers, in both urban and rural areas.</p>
+        <a class="text-link" href={u('/about/')}>Our story and leadership</a>
+      </div>
+      <div class="mvp">
+        <h3>Mission</h3>
+        <p>{mission}</p>
+        <h3>Vision</h3>
+        <p>{vision}</p>
+        <h3>Our principles</h3>
+        <ul class="ticks">{principles.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <Results />
+  <Faq />
+  <CallBand title="Want to talk to someone about our services?" text="Call our head office or visit any of our six branches. Our staff will help you choose the right loan or saving account." />
+</Base>

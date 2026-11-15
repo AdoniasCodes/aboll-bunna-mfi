@@ -1,0 +1,42 @@
+---
+import { org } from '../data/site';
+import { u } from '../lib/url';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-name">{org.name}</p>
+      <p lang="am" class="am">{org.nameAm}</p>
+      <p>Licensed by the National Bank of Ethiopia, license No. {org.license}. Serving women, youth and farmers in Addis Ababa and the Amhara region since 2024.</p>
+    </div>
+    <div>
+      <p class="footer-h">Services</p>
+      <ul>
+        <li><a href={u('/loan-services/')}>Loan services</a></li>
+        <li><a href={u('/saving-services/')}>Saving services</a></li>
+        <li><a href={u('/financial-literacy-and-consultancy/')}>Financial literacy</a></li>
+        <li><a href={u('/services/')}>All services</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-h">Company</p>
+      <ul>
+        <li><a href={u('/about/')}>About us</a></li>
+        <li><a href={u('/articles/')}>News and notices</a></li>
+        <li><a href={u('/contact/')}>Contact and branches</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-h">Head office</p>
+      <address>
+        {org.address.line}<br />{org.address.area}<br />{org.address.city}, Ethiopia<br />
+        {org.phones.map((p) => <><a href={`tel:${p.tel}`}>{p.display}</a><br /></>)}
+        <a href={`mailto:${org.email}`}>{org.email}</a>
+      </address>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>&copy; {year} {org.name}. All rights reserved.</p>
+  </div>
+</footer>

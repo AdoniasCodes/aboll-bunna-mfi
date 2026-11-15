@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CallBand from '../components/CallBand.astro';
+import { services, loans, savings, literacy } from '../data/site';
+import { u, abs } from '../lib/url';
+
+const crumbs = [{ name: 'Services', path: '/services/' }];
+const lists = [loans, savings, literacy];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Aboll Bunna Microfinance services',
+  itemListElement: services.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'FinancialProduct', name: s.name, description: s.text, url: abs(s.href, Astro.site) } })),
+}];
+---
+<Base
+  title="Microfinance Services in Addis Ababa | Aboll Bunna MFI"
+  description="Aboll Bunna offers microfinance services in Addis Ababa: 13 loan products, 8 saving accounts and financial literacy training for businesses and farmers."
+  path="/services/"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero title="Microfinance services in Addis Ababa" intro="Whether you are starting a business, saving for the future or need emergency support, our services are designed to help you at every step." crumbs={crumbs} />
+
+  <section class="section">
+    <div class="wrap">
+      {services.map((s, i) => (
+        <article class="svc-row">
+          <Image src={s.img} alt="" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 90vw" class="rounded-photo" />
+          <div>
+            <h2>{s.name}</h2>
+            <p>{s.text}</p>
+            <ul class="chips">{lists[i].map((p) => <li><a href={u(`${s.href}#${p.slug}`)}>{p.name}</a></li>)}</ul>
+            <a class="btn" href={u(s.href)}>{s.cta}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CallBand title="Ready to take the next step?" text="Explore our loan and saving products and find the right financial solution for you. Call us today to learn more." />
+</Base>

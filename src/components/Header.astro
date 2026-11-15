@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/img/logo.webp';
+import { org } from '../data/site';
+import { u } from '../lib/url';
+
+const { path } = Astro.props as { path: string };
+const nav = [
+  { href: '/', name: 'Home' },
+  { href: '/about/', name: 'About' },
+  { href: '/loan-services/', name: 'Loans' },
+  { href: '/saving-services/', name: 'Savings' },
+  { href: '/financial-literacy-and-consultancy/', name: 'Training' },
+  { href: '/articles/', name: 'News' },
+  { href: '/contact/', name: 'Contact' },
+];
+const active = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a href={u('/')} class="brand" aria-label={`${org.name}, home`}>
+      <Image src={logo} alt={`${org.name} logo`} width={220} height={60} loading="eager" fetchpriority="high" />
+    </a>
+    <div class="menu">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <nav id="main-nav" aria-label="Main">
+        <ul>
+          {nav.map((n) => (
+            <li><a href={u(n.href)} aria-current={active(n.href) ? 'page' : undefined}>{n.name}</a></li>
+          ))}
+        </ul>
+        <a class="btn btn-small" href={`tel:${org.phones[0].tel}`}>Call {org.phones[0].display}</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    const b = document.querySelector('.menu-btn');
+    b?.addEventListener('click', () => {
+      const open = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(open));
+      b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+  </script>
+</header>

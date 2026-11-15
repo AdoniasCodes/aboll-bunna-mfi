@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ProductList from '../components/ProductList.astro';
+import CallBand from '../components/CallBand.astro';
+import { literacy } from '../data/site';
+
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Financial literacy', path: '/financial-literacy-and-consultancy/' }];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Financial literacy and consultancy',
+  description: 'Workshops and resources on budgeting, saving, investing, debt management, financial planning, entrepreneurship and risk management.',
+  provider: { '@type': 'Organization', name: 'Aboll Bunna Microfinance S.C.' },
+  inLanguage: ['am', 'en'],
+}];
+---
+<Base
+  title="Financial Literacy Training in Addis Ababa | Aboll Bunna MFI"
+  description="Join financial literacy training in Addis Ababa with Aboll Bunna Microfinance. Workshops on budgeting, saving, investing, debt, planning and running a business."
+  path="/financial-literacy-and-consultancy/"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero title="Financial literacy training in Addis Ababa" intro="Learn the financial skills you need to make informed decisions and reach your goals. Financial literacy is a right for everyone." crumbs={crumbs}>
+    <p class="hero-note">At Aboll Bunna Microfinance S.C., we believe that financial literacy is the cornerstone of financial empowerment. Our programs equip you with the knowledge and skills to manage your finances, make informed decisions and secure a prosperous future.</p>
+  </PageHero>
+  <section class="section"><div class="wrap"><ProductList items={literacy} /></div></section>
+  <CallBand title="Ready to build your financial knowledge?" text="Call us to learn about upcoming workshops and how our financial literacy programs can help you." />
+</Base>

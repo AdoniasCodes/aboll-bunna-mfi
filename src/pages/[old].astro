@@ -1,0 +1,14 @@
+---
+// Old WordPress article URLs (Amharic slugs) forward to the new /articles/ URLs.
+import { getCollection } from 'astro:content';
+import { u, abs } from '../lib/url';
+export async function getStaticPaths() {
+  return (await getCollection('articles')).map((e) => ({ params: { old: e.data.oldSlug }, props: { to: `/articles/${e.id}/` } }));
+}
+const { to } = Astro.props;
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><title>Moved</title>
+<link rel="canonical" href={abs(to, Astro.site)} /><meta name="robots" content="noindex" />
+<meta http-equiv="refresh" content={`0; url=${u(to)}`} /></head>
+<body><p>This notice has moved to <a href={u(to)}>a new address</a>.</p></body></html>

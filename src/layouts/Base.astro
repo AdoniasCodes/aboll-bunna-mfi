@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { org, faqs } from '../data/site';
+import { u, abs } from '../lib/url';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // e.g. '/about/'
+  crumbs?: { name: string; path: string }[];
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  lang?: string;
+  schema?: object[];
+  faq?: boolean;
+}
+const { title, description, path, crumbs = [], ogImage, ogType = 'website', lang = 'en', schema = [], faq = false } = Astro.props;
+const site = Astro.site;
+const canonical = abs(path, site);
+const image = ogImage ?? abs('/og-default.jpg', site);
+const noindex = import.meta.env.PUBLIC_NOINDEX === 'true';
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  '@id': abs('/#org', site),
+  name: org.name,
+  alternateName: [org.nameAm, 'Aboll Bunna MFI', 'Aboll Microfinance'],
+  slogan: org.tagline,
+  url: abs('/', site),
+  logo: abs('/icon-512.png', site),
+  image,
+  email: org.email,
+  telephone: org.phones[0].tel,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${org.address.line}, ${org.address.area}`,
+    addressLocality: org.address.city,
+    addressCountry: org.address.country,
+  },
+  areaServed: ['Addis Ababa', 'Amhara Region', 'Ethiopia'],
+  foundingDate: org.licenseDate,
+  identifier: [{ '@type': 'PropertyValue', name: 'NBE microfinance license', value: org.license }],
+};
+const ld: object[] = [orgLd, ...schema];
+if (crumbs.length) {
+  ld.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({
+      '@type': 'ListItem', position: i + 1, name: c.name, item: abs(c.path, site),
+    })),
+  });
+}
+if (faq) {
+  ld.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#3b1a0b" />
+    <link rel="icon" type="image/png" href={u('/favicon.png')} />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
+    <link rel="sitemap" href={u('/sitemap-index.xml')} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={org.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content={lang === 'am' ? 'am_ET' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Mulish:wght@400;700&family=Noto+Sans+Ethiopic:wght@400;700&display=swap"
+    />
+    <slot name="head" />
+    {ld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header path={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

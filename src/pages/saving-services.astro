@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ProductList from '../components/ProductList.astro';
+import CallBand from '../components/CallBand.astro';
+import { savings } from '../data/site';
+import { abs } from '../lib/url';
+
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: 'Saving services', path: '/saving-services/' }];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Saving products',
+  itemListElement: savings.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'DepositAccount', name: s.name, description: s.text, url: abs(`/saving-services/#${s.slug}`, Astro.site) } })),
+}];
+---
+<Base
+  title="Saving Accounts in Addis Ababa | Aboll Bunna Microfinance"
+  description="Open a saving account in Addis Ababa with Aboll Bunna: voluntary, fixed time deposit, child, women, box, organizational or interest-free. Visit any branch."
+  path="/saving-services/"
+  crumbs={crumbs}
+  schema={schema}
+>
+  <PageHero title="Saving accounts in Addis Ababa" intro="Eight saving products designed to help you save and grow your money. Together we thrive." crumbs={crumbs}>
+    <p class="hero-note">At Aboll Bunna Microfinance S.C., our savings solutions are tailored to the needs of individuals, families, and organizations, so everyone has the opportunity to save and grow their money.</p>
+  </PageHero>
+  <section class="section"><div class="wrap"><ProductList items={savings} /></div></section>
+  <CallBand title="Ready to start saving for your future?" text="Open an account at any branch or call us to find the right saving product for your goals." />
+</Base>
