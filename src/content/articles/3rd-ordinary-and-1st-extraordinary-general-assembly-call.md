@@ -1,5 +1,6 @@
 ---
 title: "አቦል ቡና ማይክሮ ፋይናንስ ተቋም አ.ማ የባለአክሲዮኖች 3ኛ መደበኛ እና 1ኛ አስቸኳይ ጠቅላላ ጉባኤዎች የስብሰባ ጥሪ"
+titleShortAm: "የባለአክሲዮኖች 3ኛ መደበኛ እና 1ኛ አስቸኳይ ጠቅላላ ጉባኤዎች የስብሰባ ጥሪ"
 titleEn: "Aboll Bunna Shareholder Assembly Call, December 2025"
 descriptionEn: "Call to the Aboll Bunna shareholder assembly (3rd ordinary and 1st extraordinary) on 27 December 2025, 8:30 AM, at Ras Hotel, Addis Ababa, with agenda."
 description: "ለ ተከበራችሁ የአቦል ቡና ማይክሮ ፋይናንስ አ . ማ ባለአክሲዮኖች በሙሉ አቦል ቡና ማይክሮ ፋይናንስ ተቋም አ.ማ በንግድ ሕግ አንቀጽ 366(1)፣ 367(1)፣ 370)፣ 371፣ እና 400 እንዲሁም በአ/ማኅበሩ የመመስረቻ ጽሑፍ አንቀጽ"
