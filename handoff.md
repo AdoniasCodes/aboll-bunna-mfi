@@ -1,23 +1,28 @@
 # Handoff
 
-**Phase:** v1 built and deployed as a GitHub Pages preview (2026-11-15). Waiting on Eyoel's review before pitching.
+**Phase:** v2 (bilingual redesign) live on the GitHub Pages preview, 2026-11-15. Waiting on Eyoel's review before pitching.
 
 ## Done
-- Astro 7 static site, 8 pages + 3 Amharic notices + 404 + redirect stubs for old WP URLs.
-- SEO: titles/descriptions scored 86 to 96 (mean 90.8, 0 hard fails), JSON-LD (FinancialService, Breadcrumb,
-  FAQPage, OfferCatalog with LoanOrCredit/DepositAccount, NewsArticle, Course), sitemap, robots, llms.txt, OG image.
-- Images optimised to responsive WebP by astro:assets (hero 468KB to 44-138KB).
+- v2 redesign after Eyoel's feedback: Archivo block type, cleaner banking layout (top bar with license + phone +
+  language switch, hero with deposit card, quick-action tiles, who-we-serve, results band, notices, FAQ, CTA panel),
+  product pages with a sticky index and swipeable chips on mobile.
+- Bilingual: English `/`, Amharic `/am/`, hreflang pairs, language switch on every page. am.json translated by Gemini,
+  keys checked against en.json, no em dashes.
+- cPanel package: `pnpm zip` > `release/aboll-bunna-site-2026-11-15.zip` (6.4MB, 172 files, .htaccess included).
+- SEO: English titles 86 to 96/100, JSON-LD, sitemap (both languages), robots, llms.txt, old WP URL redirects.
+
+## Open
+- Gemini proofread of am.json NOT done: agy timed out at 20 min and 9 min (2026-11-15 night). Re-run when it answers,
+  in sections under ~6KB (see instructions.md). Also ask Gemini for a short title (<=42 chars) for the board report
+  notice (`titleShortAm` in its frontmatter); its Amharic page title is 97 chars now.
+- Native Amharic speaker should read /am/ once before the pitch.
 
 ## Key files
-- Copy + facts: `src/data/site.ts`. Notices: `src/content/articles/`. Styles: `src/styles/global.css`.
-- Repo: github.com/AdoniasCodes/aboll-bunna-mfi. Preview: https://adoniascodes.github.io/aboll-bunna-mfi/
+- Strings: `src/i18n/en.json`, `src/i18n/am.json`. Facts/images: `src/data/site.ts`. Pages: `src/views/*.astro`
+  (thin routes in `src/pages/` and `src/pages/am/`). Styles: `src/styles/global.css`. Notices: `src/content/articles/`.
+- Repo github.com/AdoniasCodes/aboll-bunna-mfi. Preview https://adoniascodes.github.io/aboll-bunna-mfi/ (noindex).
 
-## Open questions for the client
-- Contact form uses mailto (opens the visitor's mail app). Swap for a form service or Telegram if they want inbox delivery.
-- Head office map pin (only "behind Dembel City Center" known), real board member names/photos, partner logos,
-  social media links: none exist on the live site.
-- Photos are the old site's stock images. Real branch/customer photos would lift trust a lot.
+## Questions for the client
+- Contact form opens the visitor's mail app (mailto). Want inbox delivery or Telegram instead?
+- Head office map pin, board names/photos, partner logos, social links, real branch photos.
 - Is hello@abollbunnamfi.com a working inbox?
-
-## Next steps
-- Eyoel reviews preview, then pitch. On approval: point domain, production build, Search Console.
