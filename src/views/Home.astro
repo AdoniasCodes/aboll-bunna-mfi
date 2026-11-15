@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Results from '../components/Results.astro';
+import Faq from '../components/Faq.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import hero from '../assets/img/hero-coffee-farmer.webp';
+import { org, results, services, segments } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
+import { u } from '../lib/url';
+
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const h = d.home;
+const L = (p: string) => u(lp(lang, p));
+const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const notices = (await getCollection('articles')).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3);
+const quick = [
+  { icon: 'banknote', href: '/loan-services/' },
+  { icon: 'wallet', href: '/saving-services/' },
+  { icon: 'cap', href: '/financial-literacy-and-consultancy/' },
+  { icon: 'pin', href: '/contact/' },
+] as const;
+const deposits = lang === 'am' ? `${results.deposits} ${d.results.million} ${d.results.etb}` : `${d.results.etb} ${results.deposits}${d.results.million}`;
+---
+<Base lang={lang} title={d.meta.home.title} description={d.meta.home.description} path="/" faq>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="hero-kicker" lang={lang === 'en' ? 'am' : 'en'}>{h.eyebrowAm}</p>
+        <h1>{h.h1}</h1>
+        <p class="lede">{h.lede}</p>
+        <div class="hero-actions">
+          <a class="btn btn-lg" href={L('/loan-services/')}>{h.quick[0].title}</a>
+          <a class="btn btn-lg btn-outline" href={`tel:${org.phones[0].tel}`}><Icon name="phone" size={18} /> {org.phones[0].display}</a>
+        </div>
+        <dl class="trust">
+          <div><dt>{h.trust1}</dt><dd>{results.customers}</dd></div>
+          <div><dt>{h.trust2}</dt><dd>{results.branches}</dd></div>
+          <div><dt>{h.trust3}</dt><dd>{results.loanProducts}</dd></div>
+        </dl>
+      </div>
+      <div class="hero-media">
+        <Image src={hero} alt="Ethiopian coffee farmer harvesting red coffee cherries" widths={[480, 720, 960]} sizes="(min-width: 1000px) 46vw, 92vw" loading="eager" fetchpriority="high" />
+        <div class="float-card" aria-hidden="true">
+          <span class="float-icon"><Icon name="trend" size={20} /></span>
+          <div>
+            <p class="float-label">{h.heroCardLabel}</p>
+            <p class="float-value">{deposits}</p>
+            <p class="float-note">{h.heroCardNote}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick" aria-label={d.nav.services}>
+    <div class="wrap quick-grid">
+      {quick.map((q, i) => (
+        <a class="quick-tile" href={L(q.href)}>
+          <span class="quick-icon"><Icon name={q.icon} size={24} /></span>
+          <span class="quick-text"><strong>{h.quick[i].title}</strong><span>{h.quick[i].text}</span></span>
+          <Icon name="chevron" size={20} class="quick-chev" />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="svc-h">{h.servicesH}</h2>
+        <p>{h.servicesIntro}</p>
+      </div>
+      <div class="svc-grid">
+        {services.map((s, i) => (
+          <a class="svc" href={L(s.href)}>
+            <Image src={s.img} alt="" widths={[400, 640]} sizes="(min-width: 1000px) 30vw, 92vw" />
+            <div class="svc-body">
+              <span class="svc-icon"><Icon name={s.icon} size={22} /></span>
+              <h3>{d.services[i].name}</h3>
+              <p>{d.services[i].text}</p>
+              <span class="more">{d.services[i].cta} <Icon name="chevron" size={16} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="serve-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="serve-h">{h.serveH}</h2>
+        <p>{h.serveIntro}</p>
+      </div>
+      <div class="serve-grid">
+        {segments.map((s, i) => (
+          <a class="serve" href={L(s.href)}>
+            <Image src={s.img} alt="" widths={[400, 640]} sizes="(min-width: 1000px) 30vw, 92vw" />
+            <div class="serve-body">
+              <h3>{h.serve[i].title}</h3>
+              <p>{h.serve[i].text}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <div>
+        <h2 id="about-h">{h.aboutH}</h2>
+        <p class="lede-sm">{h.aboutText}</p>
+        <a class="more" href={L('/about/')}>{h.aboutLink} <Icon name="chevron" size={16} /></a>
+      </div>
+      <div class="mvp">
+        <div><h3>{h.missionH}</h3><p>{d.org.mission}</p></div>
+        <div><h3>{h.visionH}</h3><p>{d.org.vision}</p></div>
+        <div class="mvp-wide"><h3>{h.principlesH}</h3>
+          <ul class="checks">{d.org.principles.map((p) => <li><Icon name="check" size={16} />{p}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Results lang={lang} />
+
+  <section class="section" aria-labelledby="news-h">
+    <div class="wrap">
+      <div class="section-head row">
+        <h2 id="news-h">{h.newsH}</h2>
+        <a class="more" href={L('/articles/')}>{d.ui.allNotices} <Icon name="chevron" size={16} /></a>
+      </div>
+      <ul class="notice-grid">
+        {notices.map((n) => (
+          <li>
+            <a class="notice-card" href={L(`/articles/${n.id}/`)}>
+              <time datetime={n.data.date.toISOString()}>{fmt(n.data.date)}</time>
+              <strong lang="am">{n.data.title}</strong>
+              {lang === 'en' && <span>{n.data.titleEn}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Faq lang={lang} />
+  <CtaPanel lang={lang} title={h.ctaH} text={h.ctaText} />
+</Base>

@@ -1,42 +1,50 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/img/logo-stacked.webp';
+import Icon from './Icon.astro';
 import { org } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
 import { u } from '../lib/url';
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const L = (p: string) => u(lp(lang, p));
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <div>
-      <p class="footer-name">{org.name}</p>
-      <p lang="am" class="am">{org.nameAm}</p>
-      <p>Licensed by the National Bank of Ethiopia, license No. {org.license}. Serving women, youth and farmers in Addis Ababa and the Amhara region since 2024.</p>
+    <div class="footer-brand">
+      <div class="footer-logo"><Image src={logo} alt="" width={120} height={128} /></div>
+      <p class="footer-name">{d.brand}</p>
+      <p>{d.ui.footerAbout}</p>
     </div>
     <div>
-      <p class="footer-h">Services</p>
+      <p class="footer-h">{d.ui.footerServices}</p>
       <ul>
-        <li><a href={u('/loan-services/')}>Loan services</a></li>
-        <li><a href={u('/saving-services/')}>Saving services</a></li>
-        <li><a href={u('/financial-literacy-and-consultancy/')}>Financial literacy</a></li>
-        <li><a href={u('/services/')}>All services</a></li>
+        <li><a href={L('/loan-services/')}>{d.ui.loanServices}</a></li>
+        <li><a href={L('/saving-services/')}>{d.ui.savingServices}</a></li>
+        <li><a href={L('/financial-literacy-and-consultancy/')}>{d.ui.financialLiteracy}</a></li>
+        <li><a href={L('/services/')}>{d.ui.allServices}</a></li>
       </ul>
     </div>
     <div>
-      <p class="footer-h">Company</p>
+      <p class="footer-h">{d.ui.footerCompany}</p>
       <ul>
-        <li><a href={u('/about/')}>About us</a></li>
-        <li><a href={u('/articles/')}>News and notices</a></li>
-        <li><a href={u('/contact/')}>Contact and branches</a></li>
+        <li><a href={L('/about/')}>{d.ui.aboutUs}</a></li>
+        <li><a href={L('/articles/')}>{d.ui.newsNotices}</a></li>
+        <li><a href={L('/contact/')}>{d.ui.contactBranches}</a></li>
       </ul>
     </div>
     <div>
-      <p class="footer-h">Head office</p>
+      <p class="footer-h">{d.ui.headOffice}</p>
       <address>
-        {org.address.line}<br />{org.address.area}<br />{org.address.city}, Ethiopia<br />
-        {org.phones.map((p) => <><a href={`tel:${p.tel}`}>{p.display}</a><br /></>)}
-        <a href={`mailto:${org.email}`}>{org.email}</a>
+        <span class="f-row"><Icon name="pin" size={16} /><span>{d.org.addressLine}<br />{d.org.addressArea}<br />{d.org.city}</span></span>
+        {org.phones.map((p) => <span class="f-row"><Icon name="phone" size={16} /><a href={`tel:${p.tel}`}>{p.display}</a></span>)}
+        <span class="f-row"><Icon name="mail" size={16} /><a href={`mailto:${org.email}`}>{org.email}</a></span>
       </address>
     </div>
   </div>
   <div class="wrap footer-base">
-    <p>&copy; {year} {org.name}. All rights reserved.</p>
+    <p>&copy; {year} {d.brand.replace(/\.$/, "")}. {d.ui.rights}</p>
+    <p>{d.ui.licenseNo} {org.license}</p>
   </div>
 </footer>

@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+import V from '../../../views/Article.astro';
+export async function getStaticPaths() {
+  return (await getCollection('articles')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+---
+<V lang="am" entry={Astro.props.entry} />

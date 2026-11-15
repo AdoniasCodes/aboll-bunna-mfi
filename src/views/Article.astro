@@ -1,0 +1,55 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import { org } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
+import { u, abs } from '../lib/url';
+
+const { lang, entry } = Astro.props as { lang: Lang; entry: CollectionEntry<'articles'> };
+const d = t(lang);
+const { Content } = await render(entry);
+const a = entry.data;
+const path = `/articles/${entry.id}/`;
+// The notice body is Amharic in both language versions, so the Amharic URL is canonical.
+const canonicalPath = lp('am', path);
+const crumbs = [{ name: d.ui.newsNotices, path: '/articles/' }, { name: lang === 'en' ? a.titleEn : a.title, path }];
+const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const title = lang === 'en' ? a.titleEn : `${a.titleShortAm ?? a.title} | ${d.brandShort}`;
+const description = lang === 'en' ? a.descriptionEn : `${a.description}…`;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: a.title,
+  alternativeHeadline: a.titleEn,
+  description: a.descriptionEn,
+  inLanguage: 'am',
+  datePublished: a.date.toISOString(),
+  dateModified: a.modified.toISOString(),
+  mainEntityOfPage: abs(canonicalPath, Astro.site),
+  image: abs('/og-default.jpg', Astro.site),
+  author: { '@type': 'Organization', name: `${org.name} Board of Directors` },
+  publisher: { '@id': abs('/#org', Astro.site) },
+}];
+---
+<Base lang={lang} title={title} description={description} path={path} canonicalPath={canonicalPath} crumbs={crumbs} ogType="article" schema={schema}>
+  <article class="article">
+    <div class="wrap narrow">
+      <nav aria-label="Breadcrumb" class="crumbs">
+        <a href={u(lp(lang, '/'))}>{d.nav.breadcrumbHome}</a><a href={u(lp(lang, '/articles/'))}>{d.ui.newsNotices}</a><span aria-current="page">{crumbs[1].name}</span>
+      </nav>
+      <p class="article-meta"><Icon name="file" size={16} /><time datetime={a.date.toISOString()}>{fmt(a.date)}</time>{lang === 'en' && <span class="pill">{d.ui.publishedInAmharic}</span>}</p>
+      {lang === 'en' ? (
+        <>
+          <p class="article-am" lang="am">{a.title}</p>
+          <h1 class="article-h1-en">{a.titleEn}</h1>
+        </>
+      ) : (
+        <h1 class="article-h1-am">{a.title}</h1>
+      )}
+      <div class="prose article-body" lang="am"><Content /></div>
+    </div>
+  </article>
+  <CtaPanel lang={lang} title={d.articlesPage.ctaH} text={d.articlesPage.ctaText} />
+</Base>

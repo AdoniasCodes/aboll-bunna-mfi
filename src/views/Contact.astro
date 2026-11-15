@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { org } from '../data/site';
+import { t, type Lang } from '../i18n';
+
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const c = d.contactPage;
+const crumbs = [{ name: d.nav.contact, path: '/contact/' }];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: c.h1,
+  inLanguage: lang,
+}];
+---
+<Base lang={lang} title={d.meta.contact.title} description={d.meta.contact.description} path="/contact/" crumbs={crumbs} schema={schema}>
+  <PageHero lang={lang} title={c.h1} intro={c.intro} crumbs={crumbs} />
+  <section class="section">
+    <div class="wrap split contact">
+      <div>
+        <h2>{c.callH}</h2>
+        <ul class="contact-list">
+          {org.phones.map((p) => (
+            <li><span class="c-icon"><Icon name="phone" /></span><span><small>{p.kind === 'headOffice' ? d.ui.headOffice : d.ui.mobile}</small><a href={`tel:${p.tel}`}>{p.display}</a></span></li>
+          ))}
+          <li><span class="c-icon"><Icon name="mail" /></span><span><small>{d.ui.email}</small><a href={`mailto:${org.email}`}>{org.email}</a></span></li>
+          <li><span class="c-icon"><Icon name="pin" /></span><span><small>{d.ui.headOffice}</small>{d.org.addressLine}, {d.org.addressArea}, {d.org.city}<a class="more" href={org.mapUrl} rel="noopener" target="_blank">{d.ui.openMap} <Icon name="chevron" size={16} /></a></span></li>
+        </ul>
+        <h3>{d.ui.branches}</h3>
+        <ul class="branch-chips">{d.org.branches.map((b) => <li><Icon name="pin" size={14} />{b}</li>)}</ul>
+      </div>
+
+      <form class="form" action={`mailto:${org.email}`} method="post" enctype="text/plain">
+        <h2>{c.formH}</h2>
+        <p>{c.formIntro}</p>
+        <label>{c.name}<input name="name" autocomplete="name" required /></label>
+        <label>{c.phone}<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+        <label>{c.email}<input name="email" type="email" autocomplete="email" /></label>
+        <label>{c.topic}<select name="topic">{c.topics.map((x) => <option>{x}</option>)}</select></label>
+        <label>{c.message}<textarea name="message" rows="5" required></textarea></label>
+        <button class="btn btn-lg" type="submit">{c.send}</button>
+      </form>
+    </div>
+  </section>
+</Base>

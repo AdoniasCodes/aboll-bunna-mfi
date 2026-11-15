@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Results from '../components/Results.astro';
+import Faq from '../components/Faq.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import farmer from '../assets/img/agriculture-tea-farmer.webp';
+import { org } from '../data/site';
+import { t, type Lang } from '../i18n';
+
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const a = d.about;
+const crumbs = [{ name: d.ui.aboutUs, path: '/about/' }];
+const etb = (v: string) => (lang === 'am' ? `${v} ${d.results.etb}` : `${d.results.etb} ${v}`);
+---
+<Base lang={lang} title={d.meta.about.title} description={d.meta.about.description} path="/about/" crumbs={crumbs} faq>
+  <PageHero lang={lang} title={a.h1} intro={a.intro} crumbs={crumbs} />
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="prose">
+        <h2>{a.backgroundH}</h2>
+        <p>{a.p1}</p>
+        <p>{a.p2}</p>
+        <p>{a.p3}</p>
+        <p>{a.p4}</p>
+      </div>
+      <div class="about-media">
+        <Image src={farmer} alt="" widths={[420, 700]} sizes="(min-width: 1000px) 40vw, 92vw" />
+        <ul class="branch-chips" aria-label={d.ui.branches}>{d.org.branches.map((b) => <li><Icon name="pin" size={14} />{b}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="wrap mvp mvp-3">
+      <div><h2>{d.home.visionH}</h2><p>{d.org.vision}</p></div>
+      <div><h2>{d.home.missionH}</h2><p>{d.org.mission}</p></div>
+      <div><h2>{d.home.principlesH}</h2><ul class="checks">{d.org.principles.map((p) => <li><Icon name="check" size={16} />{p}</li>)}</ul></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <h2>{a.detailsH}</h2>
+        <dl class="facts">
+          <dt>{a.legalName}</dt><dd>{org.name}<br /><span lang="am">{org.nameAm}</span></dd>
+          <dt>{a.type}</dt><dd>{a.typeValue}</dd>
+          <dt>{a.license}</dt><dd>{org.license}</dd>
+          <dt>{a.tradeReg}</dt><dd>{org.tradeReg}</dd>
+          <dt>{a.subscribed}</dt><dd>{etb(org.subscribed)}</dd>
+          <dt>{a.paidUp}</dt><dd>{etb(org.paidUp)}</dd>
+          <dt>{a.headOffice}</dt><dd>{d.org.addressLine}, {d.org.addressArea}</dd>
+        </dl>
+      </div>
+      <div class="prose">
+        <h2>{a.beyondH}</h2>
+        <p>{a.beyond}</p>
+      </div>
+    </div>
+  </section>
+
+  <Results lang={lang} />
+  <Faq lang={lang} />
+  <CtaPanel lang={lang} title={a.ctaH} text={a.ctaText} />
+</Base>

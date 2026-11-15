@@ -1,45 +1,8 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import CallBand from '../../components/CallBand.astro';
-import { org } from '../../data/site';
-import { u, abs } from '../../lib/url';
-
+import { getCollection } from 'astro:content';
+import V from '../../views/Article.astro';
 export async function getStaticPaths() {
   return (await getCollection('articles')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
-const { entry } = Astro.props;
-const { Content } = await render(entry);
-const d = entry.data;
-const path = `/articles/${entry.id}/`;
-const crumbs = [{ name: 'News and notices', path: '/articles/' }, { name: d.titleEn, path }];
-const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-const title = d.titleEn;
-const schema = [{
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  headline: d.title,
-  alternativeHeadline: d.titleEn,
-  inLanguage: 'am',
-  datePublished: d.date.toISOString(),
-  dateModified: d.modified.toISOString(),
-  mainEntityOfPage: abs(path, Astro.site),
-  image: abs('/og-default.jpg', Astro.site),
-  author: { '@type': 'Organization', name: `${org.name} Board of Directors` },
-  publisher: { '@id': abs('/#org', Astro.site) },
-}];
 ---
-<Base title={title} description={d.descriptionEn} path={path} crumbs={crumbs} ogType="article" schema={schema}>
-  <article class="article">
-    <div class="wrap narrow">
-      <nav aria-label="Breadcrumb" class="crumbs">
-        <a href={u('/')}>Home</a><a href={u('/articles/')}>News and notices</a><span aria-current="page">{d.titleEn}</span>
-      </nav>
-      <p class="article-meta"><time datetime={d.date.toISOString()}>{fmt(d.date)}</time> <span>Published in Amharic</span></p>
-      <p class="article-am" lang="am">{d.title}</p>
-      <h1>{d.titleEn}</h1>
-      <div class="prose am" lang="am"><Content /></div>
-    </div>
-  </article>
-  <CallBand title="Questions about this notice?" text="Shareholders can call the head office or visit us behind Dembel City Center, Commercial Nominees Building, 1st floor." />
-</Base>
+<V lang="en" entry={Astro.props.entry} />

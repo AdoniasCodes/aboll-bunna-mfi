@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { t, lp, type Lang } from '../i18n';
+import { u } from '../lib/url';
+
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const crumbs = [{ name: d.ui.newsNotices, path: '/articles/' }];
+const posts = (await getCollection('articles')).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = (x: Date) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base lang={lang} title={d.meta.articles.title} description={d.meta.articles.description} path="/articles/" crumbs={crumbs}>
+  <PageHero lang={lang} title={d.articlesPage.h1} intro={d.articlesPage.intro} crumbs={crumbs} />
+  <section class="section">
+    <div class="wrap narrow">
+      <ol class="post-list">
+        {posts.map((p) => (
+          <li>
+            <a href={u(lp(lang, `/articles/${p.id}/`))}>
+              <span class="post-icon"><Icon name="file" size={22} /></span>
+              <span>
+                <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+                <strong lang="am">{p.data.title}</strong>
+                {lang === 'en' && <span class="post-en">{p.data.titleEn}</span>}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>

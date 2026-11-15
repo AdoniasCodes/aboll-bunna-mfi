@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { items: { slug: string; img: ImageMetadata; name: string; text: string }[] }
+const { items } = Astro.props;
+---
+<div class="catalog">
+  <nav class="catalog-index" aria-label="Products on this page">
+    <ul>{items.map((p) => <li><a href={`#${p.slug}`}>{p.name}</a></li>)}</ul>
+  </nav>
+  <ul class="cards">
+    {items.map((p) => (
+      <li id={p.slug} class="card">
+        <Image src={p.img} alt="" widths={[360, 560]} sizes="(min-width: 1100px) 340px, (min-width: 700px) 45vw, 92vw" />
+        <div class="card-body">
+          <h2>{p.name}</h2>
+          <p>{p.text}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>

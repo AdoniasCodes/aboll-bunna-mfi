@@ -1,18 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
-import { u } from '../lib/url';
+import V from '../views/NotFound.astro';
 ---
-<Base title="Page not found | Aboll Bunna Microfinance" description="This page does not exist. Go back to the Aboll Bunna Microfinance home page." path="/404/">
-  <section class="page-hero">
-    <div class="wrap">
-      <h1>We could not find that page</h1>
-      <p class="lede">It may have moved when we rebuilt our website. Try one of these instead.</p>
-      <p class="hero-actions">
-        <a class="btn" href={u('/')}>Home</a>
-        <a class="btn btn-ghost" href={u('/loan-services/')}>Loans</a>
-        <a class="btn btn-ghost" href={u('/saving-services/')}>Savings</a>
-        <a class="btn btn-ghost" href={u('/articles/')}>News</a>
-      </p>
-    </div>
-  </section>
-</Base>
+<V lang="en" />

@@ -3,7 +3,7 @@
 import { getCollection } from 'astro:content';
 import { u, abs } from '../lib/url';
 export async function getStaticPaths() {
-  return (await getCollection('articles')).map((e) => ({ params: { old: e.data.oldSlug }, props: { to: `/articles/${e.id}/` } }));
+  return (await getCollection('articles')).map((e) => ({ params: { old: e.data.oldSlug }, props: { to: `/am/articles/${e.id}/` } }));
 }
 const { to } = Astro.props;
 ---

@@ -1,0 +1,220 @@
+{
+  "langName": "English",
+  "brand": "Aboll Bunna Microfinance S.C.",
+  "brandShort": "Aboll Bunna",
+  "tagline": "Together we thrive",
+  "meta": {
+    "home": { "title": "Aboll Bunna Microfinance | Loans and Savings in Addis Ababa", "description": "Licensed microfinance in Addis Ababa and Amhara with six branches. Loans for business, farming and housing, plus saving accounts. Call +251 11 558 2258." },
+    "about": { "title": "About Aboll Bunna Microfinance S.C. | Our Story and Mission", "description": "Aboll Bunna Microfinance S.C. is an NBE-licensed MFI (MFI/066/2024) serving women, youth and farmers from six branches in Addis Ababa and Amhara." },
+    "services": { "title": "Microfinance Services in Addis Ababa | Aboll Bunna MFI", "description": "Aboll Bunna offers microfinance services in Addis Ababa: 13 loan products, 8 saving accounts and financial literacy training for businesses and farmers." },
+    "loans": { "title": "Loan Services in Addis Ababa | Aboll Bunna Microfinance", "description": "Aboll Bunna loan services in Addis Ababa: SME, micro business, agriculture, housing, women, youth, consumer and emergency loans. Call +251 11 558 2258." },
+    "savings": { "title": "Saving Accounts in Addis Ababa | Aboll Bunna Microfinance", "description": "Open a saving account in Addis Ababa with Aboll Bunna: voluntary, fixed time deposit, child, women, box, organizational or interest-free. Visit any branch." },
+    "literacy": { "title": "Financial Literacy Training in Addis Ababa | Aboll Bunna MFI", "description": "Join financial literacy training in Addis Ababa with Aboll Bunna Microfinance. Workshops on budgeting, saving, investing, debt, planning and running a business." },
+    "contact": { "title": "Contact Aboll Bunna Microfinance | Phone, Office, Branches", "description": "To contact Aboll Bunna Microfinance, call +251 11 558 2258 or visit our head office behind Dembel City Center, Addis Ababa. Six branches serve you." },
+    "articles": { "title": "Aboll Bunna Shareholder Notices and News | Microfinance", "description": "Read Aboll Bunna shareholder notices: general assembly calls, annual board reports and announcements from Aboll Bunna Microfinance S.C., mostly in Amharic." },
+    "notFound": { "title": "Page not found | Aboll Bunna Microfinance", "description": "This page does not exist. Go back to the Aboll Bunna Microfinance home page." }
+  },
+  "nav": {
+    "home": "Home", "about": "About", "loans": "Loans", "savings": "Savings", "training": "Training", "news": "News", "contact": "Contact",
+    "menuOpen": "Open menu", "menuClose": "Close menu", "skip": "Skip to content", "breadcrumbHome": "Home", "services": "Services"
+  },
+  "ui": {
+    "licensed": "Licensed by the National Bank of Ethiopia",
+    "licenseNo": "License No.",
+    "call": "Call",
+    "applyLoan": "Apply for a loan",
+    "openAccount": "Open an account",
+    "findBranch": "Find a branch",
+    "seeLoans": "See our loans",
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "switchTo": "አማርኛ",
+    "switchLabel": "Read this page in Amharic",
+    "publishedInAmharic": "Published in Amharic",
+    "readReport": "Read the full annual report (Amharic)",
+    "allNotices": "All notices",
+    "headOffice": "Head office",
+    "mobile": "Mobile",
+    "email": "Email",
+    "openMap": "Open in Google Maps",
+    "branches": "Branches",
+    "rights": "All rights reserved.",
+    "footerAbout": "Licensed by the National Bank of Ethiopia, license No. MFI/066/2024. Serving women, youth and farmers in Addis Ababa and the Amhara region since 2024.",
+    "footerServices": "Services",
+    "footerCompany": "Company",
+    "loanServices": "Loan services",
+    "savingServices": "Saving services",
+    "financialLiteracy": "Financial literacy",
+    "allServices": "All services",
+    "aboutUs": "About us",
+    "newsNotices": "News and notices",
+    "contactBranches": "Contact and branches"
+  },
+  "home": {
+    "eyebrowAm": "አቦል ቡና ማይክሮ ፋይናንስ",
+    "h1": "Microfinance in Addis Ababa for women, youth and farmers",
+    "lede": "Loans, savings and training that help small businesses, farmers and families grow. Licensed by the National Bank of Ethiopia.",
+    "trust1": "Customers in 2025/2026",
+    "trust2": "Branches",
+    "trust3": "Loan products",
+    "heroCardLabel": "Customer deposits, 2025/2026",
+    "heroCardNote": "up 300% on the year before",
+    "quick": [
+      { "title": "Get a loan", "text": "Business, farm, housing and personal loans" },
+      { "title": "Save money", "text": "Eight saving accounts for every goal" },
+      { "title": "Learn and grow", "text": "Financial literacy and business training" },
+      { "title": "Visit a branch", "text": "Six branches in Addis Ababa and Amhara" }
+    ],
+    "servicesH": "Loans, savings and training under one roof",
+    "servicesIntro": "A wide range of financial services built for people the big banks often overlook.",
+    "serveH": "Who we serve",
+    "serveIntro": "We focus on the people who drive Ethiopia's economy, in cities and in the countryside.",
+    "serve": [
+      { "title": "Women", "text": "Women business loans and women saving accounts with favorable terms that support financial independence." },
+      { "title": "Youth", "text": "Youth loans for young entrepreneurs starting their careers or their first business." },
+      { "title": "Farmers", "text": "Agriculture loans for groups and individuals, plus urban agriculture loans for city farming projects." }
+    ],
+    "aboutH": "Together we thrive",
+    "aboutText": "Welcome to Aboll Bunna Microfinance S.C., where we are dedicated to fostering economic and social growth through innovative financial products and services. Our mission is to empower communities, especially women, youth, and farmers, in both urban and rural areas.",
+    "aboutLink": "Our story and leadership",
+    "missionH": "Mission",
+    "visionH": "Vision",
+    "principlesH": "Our principles",
+    "newsH": "Latest notices",
+    "ctaH": "Want to talk to someone about our services?",
+    "ctaText": "Call our head office or visit any of our six branches. Our staff will help you choose the right loan or saving account."
+  },
+  "services": [
+    { "name": "Loans", "text": "Tailored loans for small businesses, agriculture, housing and personal needs. Thirteen loan products in all.", "cta": "See loan products" },
+    { "name": "Savings", "text": "Flexible savings accounts with competitive interest rates, from child saving to fixed time deposits.", "cta": "See saving products" },
+    { "name": "Training and consulting", "text": "Workshops and resources on budgeting, saving, debt and running a business, so you decide with confidence.", "cta": "See training topics" }
+  ],
+  "org": {
+    "mission": "We are committed to providing innovative financial products and services while increasing community savings. By focusing on women, youth, and farmers, we aim to foster economic empowerment and sustainable growth.",
+    "vision": "At Aboll Bunna Microfinance S.C., our vision is to become a leading, sustainable microfinance institution that fulfills the economic and social needs of our shareholders and the communities we serve.",
+    "principles": ["Customer-centric approach", "Superior returns", "Professional excellence and innovation", "Ethical standards", "Corporate social responsibility"],
+    "branches": ["Dembel (Addis Ababa)", "Gofa (Addis Ababa)", "Debre Birhan", "Bahir Dar", "Chacha", "Debre Markos"],
+    "addressLine": "Commercial Nominees Building, 1st floor, behind Dembel City Center",
+    "addressArea": "Kirkos Sub-City, Woreda 9, House No. 620",
+    "city": "Addis Ababa, Ethiopia"
+  },
+  "results": {
+    "h": "Our 2025/2026 fiscal year in numbers",
+    "sub": "From the Board of Directors' annual report to shareholders, fiscal year ended 30 June 2026.",
+    "customers": "Customers served", "customersNote": "up 134% on the year before",
+    "deposits": "Customer deposits", "depositsNote": "up 300% on the year before",
+    "loans": "Loans disbursed", "loansNote": "to small businesses, farmers and families",
+    "assets": "Total assets", "assetsNote": "double the previous year",
+    "branches": "Branches",
+    "etb": "ETB", "million": "M"
+  },
+  "faqH": "Frequently asked questions",
+  "faq": [
+    { "q": "What types of loans do you offer?", "a": "We offer 13 loan products, including SME and micro business loans, agriculture and urban agriculture loans, housing and construction loans, consumer loans for employees and non-employees, women business loans, youth loans and special emergency loans." },
+    { "q": "How can I open a savings account with Aboll Bunna Microfinance?", "a": "Opening a savings account is simple. Visit our nearest branch or call us to get started." },
+    { "q": "Who can benefit from your services?", "a": "Our services are tailored for women, youth, and farmers in both urban and rural settings, but we welcome all individuals looking to improve their financial wellbeing." },
+    { "q": "What is your interest rate for your loans?", "a": "Interest rates depend on the type of loan, the payment period and other factors. Call us on +251 11 558 2258 for the rate that applies to you." },
+    { "q": "Where are your branches?", "a": "We have six branches: Dembel and Gofa in Addis Ababa, plus Debre Birhan, Bahir Dar, Chacha and Debre Markos in the Amhara region. Our head office is behind Dembel City Center, Addis Ababa." },
+    { "q": "Is Aboll Bunna Microfinance licensed?", "a": "Yes. Aboll Bunna Microfinance S.C. is licensed by the National Bank of Ethiopia under microfinance license No. MFI/066/2024, issued on 16 April 2024." }
+  ],
+  "about": {
+    "h1": "About Aboll Bunna Microfinance",
+    "intro": "The story behind Aboll Bunna Microfinance S.C. and the people committed to transforming lives.",
+    "backgroundH": "Our background",
+    "p1": "Aboll Bunna Microfinance S.C. was founded with a vision to empower individuals and communities by providing innovative financial services tailored to their needs. Our journey began with a mission to create economic opportunities for those underserved by traditional banking systems, focusing on women, youth, and farmers in both urban and rural settings.",
+    "p2": "Since our inception, we have been dedicated to fostering economic growth, enhancing financial literacy, and promoting sustainable development. By leveraging technology and a team of highly motivated professionals, we strive to deliver exceptional services that make a tangible difference in the lives of our clients.",
+    "p3": "We received our microfinance license (No. MFI/066/2024) from the National Bank of Ethiopia on 16 April 2024 under Proclamation No. 626/2009, as amended by Proclamation No. 1164/2019. Today we serve customers from six branches in Addis Ababa and the Amhara region.",
+    "p4": "We are moving our services onto a shared core banking system together with 45 other microfinance institutions, and are preparing to launch mobile and internet banking.",
+    "detailsH": "Company details",
+    "legalName": "Legal name", "type": "Type", "typeValue": "Share company engaged in microfinance",
+    "license": "NBE license", "tradeReg": "Trade registration",
+    "subscribed": "Subscribed capital", "paidUp": "Paid-up capital", "headOffice": "Head office",
+    "beyondH": "Beyond financial services",
+    "beyond": "Our commitment extends beyond financial services. We believe in creating lasting change by empowering individuals to achieve their dreams and transform their lives. During the 2025/2026 fiscal year we supported families in need in Kirkos Sub-City over the Ethiopian Christmas holiday.",
+    "ctaH": "Join the Aboll Bunna community",
+    "ctaText": "Become a customer or learn more about becoming a shareholder. Call us or visit the head office behind Dembel City Center."
+  },
+  "servicesPage": {
+    "h1": "Microfinance services in Addis Ababa",
+    "intro": "Whether you are starting a business, saving for the future or need emergency support, our services are designed to help you at every step.",
+    "ctaH": "Ready to take the next step?",
+    "ctaText": "Explore our loan and saving products and find the right financial solution for you. Call us today to learn more."
+  },
+  "loansPage": {
+    "h1": "Loan services in Addis Ababa",
+    "intro": "Thirteen loan products to support your business, personal and community needs. Together we thrive.",
+    "note": "At Aboll Bunna Microfinance S.C., we offer a comprehensive range of loan products designed to empower individuals, businesses, and communities. Whether you are looking to start a small business, invest in agriculture, purchase property, or handle emergencies, we have the right financial solution for you.",
+    "ctaH": "Ready to apply?",
+    "ctaText": "Call us or visit a branch. Rates depend on the loan type and repayment period, and our staff will explain the terms before you sign."
+  },
+  "savingsPage": {
+    "h1": "Saving accounts in Addis Ababa",
+    "intro": "Eight saving products designed to help you save and grow your money. Together we thrive.",
+    "note": "At Aboll Bunna Microfinance S.C., our savings solutions are tailored to the needs of individuals, families, and organizations, so everyone has the opportunity to save and grow their money.",
+    "ctaH": "Ready to start saving for your future?",
+    "ctaText": "Open an account at any branch or call us to find the right saving product for your goals."
+  },
+  "literacyPage": {
+    "h1": "Financial literacy training in Addis Ababa",
+    "intro": "Learn the financial skills you need to make informed decisions and reach your goals. Financial literacy is a right for everyone.",
+    "note": "At Aboll Bunna Microfinance S.C., we believe that financial literacy is the cornerstone of financial empowerment. Our programs equip you with the knowledge and skills to manage your finances, make informed decisions and secure a prosperous future.",
+    "ctaH": "Ready to build your financial knowledge?",
+    "ctaText": "Call us to learn about upcoming workshops and how our financial literacy programs can help you."
+  },
+  "contactPage": {
+    "h1": "Contact Aboll Bunna Microfinance",
+    "intro": "We are here to help with all your financial needs. Call, email or visit us, and let's thrive together.",
+    "callH": "Call or visit",
+    "formH": "Send us a message",
+    "formIntro": "Fill out this form and we will get back to you shortly.",
+    "name": "Full name", "phone": "Phone number", "email": "Email (optional)", "topic": "How can we help?",
+    "topics": ["Loan", "Saving account", "Financial literacy training", "Shareholder question", "Other"],
+    "message": "Message", "send": "Send message"
+  },
+  "articlesPage": {
+    "h1": "Aboll Bunna shareholder notices and news",
+    "intro": "General assembly calls, annual board reports and announcements from Aboll Bunna Microfinance S.C. Most notices are published in Amharic.",
+    "ctaH": "Questions about this notice?",
+    "ctaText": "Shareholders can call the head office or visit us behind Dembel City Center, Commercial Nominees Building, 1st floor."
+  },
+  "notFound": {
+    "h1": "We could not find that page",
+    "text": "It may have moved when we rebuilt our website. Try one of these instead."
+  },
+  "products": {
+    "loans": {
+      "sme-loan": { "name": "Small and Medium Enterprise (SME) Loan", "text": "Our SME loans are designed to support the growth and development of small and medium-sized enterprises. These loans provide the necessary capital to expand operations, purchase inventory, or invest in new technology." },
+      "micro-business-loan": { "name": "Micro Business Loan", "text": "For entrepreneurs and small business owners, our micro business loans offer the financial support needed to start or expand a business. This product is ideal for those who need smaller amounts of capital to achieve their business goals." },
+      "employee-consumer-loan": { "name": "Consumer Loan (Employee)", "text": "Our consumer loans for employees are tailored to meet personal financial needs such as education, medical expenses, or major purchases. These loans are designed to provide financial stability and peace of mind." },
+      "non-employee-consumer-loan": { "name": "Consumer Loan (Non-employee)", "text": "We also offer consumer loans for individuals who are not employed, catering to various personal financial needs. This product is flexible and accessible to a broader audience." },
+      "agriculture-loan": { "name": "Agriculture Loan (Group and Individual SLLC)", "text": "Our agricultural loans support farmers and agricultural businesses, helping them invest in equipment, seeds, and other necessary resources to boost productivity and growth." },
+      "fixed-asset-loan": { "name": "Fixed Asset Purchase Loan", "text": "This loan product is designed for individuals and businesses looking to purchase fixed assets such as machinery, equipment, or property. It provides the capital needed to make significant investments that drive growth." },
+      "housing-construction-loan": { "name": "Housing and Construction Loan", "text": "Our housing and construction loans provide the financial support needed for building, purchasing, or renovating homes. This product is ideal for individuals looking to invest in their living spaces." },
+      "emergency-loan": { "name": "Special Emergency Loan", "text": "Special emergency loans are designed to provide quick financial relief in times of unexpected crises or emergencies, ensuring that you have the support you need when you need it most." },
+      "urban-agriculture-loan": { "name": "Urban Agriculture Loan", "text": "Supporting urban farming initiatives, our urban agriculture loans provide the capital needed for urban farming projects, contributing to food security and sustainable development in urban areas." },
+      "women-business-loan": { "name": "Women Business Loan", "text": "Our women business loans are specifically designed to support female entrepreneurs, providing them with the financial resources needed to start or expand their businesses." },
+      "special-property-loan": { "name": "Special Property Loan", "text": "Designed for special property purchases, this loan product provides the necessary funding to acquire unique or high-value properties." },
+      "short-term-investment-loan": { "name": "Short-term Investment Loan", "text": "These loans are ideal for individuals and businesses looking to make short-term investments. They provide quick access to capital with flexible repayment options." },
+      "youth-loan": { "name": "Youth Loan", "text": "Our youth loans are aimed at young entrepreneurs and individuals looking to start their careers or businesses. This product supports the financial needs of the younger generation." }
+    },
+    "savings": {
+      "compulsory-saving": { "name": "Compulsory Saving", "text": "Our compulsory saving product is designed for clients who take loans from us. A small portion of the loan amount is saved to ensure financial discipline and provide a safety net for our clients." },
+      "individual-voluntary-saving": { "name": "Individual Voluntary Saving", "text": "This saving account is perfect for individuals who want to save regularly and have access to their funds when needed. It offers flexibility and attractive interest rates." },
+      "organizational-saving": { "name": "Organizational Saving", "text": "Designed for businesses and organizations, this saving product helps manage and grow corporate funds with ease and security." },
+      "fixed-time-deposit": { "name": "Fixed Time Deposit", "text": "Our fixed time deposit offers higher interest rates for clients who can lock in their funds for a specified period. This product is ideal for those looking to earn more from their savings." },
+      "child-saving": { "name": "Child Saving", "text": "Our child saving account helps parents and guardians save for their children's future. This product offers attractive interest rates and terms that encourage long-term saving." },
+      "box-saving": { "name": "Box Saving", "text": "This unique saving product encourages regular saving habits by providing a secure and accessible way to save money at home. Clients can deposit their savings into a provided savings box, which is periodically collected and credited to their account." },
+      "women-saving": { "name": "Women Saving", "text": "Specifically designed for women, this saving product encourages financial independence and security. It offers favorable terms to support women's financial goals." },
+      "interest-free-saving": { "name": "Interest-Free Saving", "text": "For clients who prefer to save without earning interest, our interest-free saving account provides a secure way to store money in compliance with specific financial principles." }
+    },
+    "literacy": {
+      "budgeting": { "name": "Budgeting", "text": "Learn how to create and maintain a budget that helps you track your income, manage expenses, and save for future goals. Our resources include practical tips and tools for effective budgeting." },
+      "saving": { "name": "Saving", "text": "Discover the importance of saving and strategies to build your savings over time. We offer insights on setting savings goals, choosing the right saving products, and developing a saving habit." },
+      "investing": { "name": "Investing", "text": "Understand the basics of investing and how to grow your wealth through smart investment choices. Our resources cover investment options, risk management, and long-term planning." },
+      "debt-management": { "name": "Debt Management", "text": "Learn how to manage and reduce debt with our practical advice and resources. We provide strategies for paying off debt, understanding interest rates, and improving your credit score." },
+      "financial-planning": { "name": "Financial Planning", "text": "Get insights into comprehensive financial planning to achieve your short-term and long-term financial goals. Our resources help you plan for retirement, education, and major life events." },
+      "entrepreneurship": { "name": "Entrepreneurship", "text": "For aspiring entrepreneurs, we offer resources to help you start, manage, and grow your business. Learn about business planning, funding options, and effective management practices." },
+      "risk-management": { "name": "Risk Management", "text": "Understand how to protect your finances through effective risk management. Our resources cover insurance, emergency funds, and strategies to mitigate financial risks." }
+    }
+  }
+}

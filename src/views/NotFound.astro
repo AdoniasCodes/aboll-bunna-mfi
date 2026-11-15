@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, lp, type Lang } from '../i18n';
+import { u } from '../lib/url';
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const L = (p: string) => u(lp(lang, p));
+---
+<Base lang={lang} title={d.meta.notFound.title} description={d.meta.notFound.description} path="/404/">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>{d.notFound.h1}</h1>
+      <p class="lede">{d.notFound.text}</p>
+      <p class="hero-actions">
+        <a class="btn" href={L('/')}>{d.nav.home}</a>
+        <a class="btn btn-outline" href={L('/loan-services/')}>{d.nav.loans}</a>
+        <a class="btn btn-outline" href={L('/saving-services/')}>{d.nav.savings}</a>
+        <a class="btn btn-outline" href={L('/articles/')}>{d.nav.news}</a>
+      </p>
+    </div>
+  </section>
+</Base>

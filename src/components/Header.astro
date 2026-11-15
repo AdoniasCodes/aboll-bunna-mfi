@@ -1,44 +1,56 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/img/logo.webp';
+import Icon from './Icon.astro';
 import { org } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
 import { u } from '../lib/url';
 
-const { path } = Astro.props as { path: string };
+const { lang, path } = Astro.props as { lang: Lang; path: string };
+const d = t(lang);
+const other: Lang = lang === 'en' ? 'am' : 'en';
 const nav = [
-  { href: '/', name: 'Home' },
-  { href: '/about/', name: 'About' },
-  { href: '/loan-services/', name: 'Loans' },
-  { href: '/saving-services/', name: 'Savings' },
-  { href: '/financial-literacy-and-consultancy/', name: 'Training' },
-  { href: '/articles/', name: 'News' },
-  { href: '/contact/', name: 'Contact' },
+  { href: '/', name: d.nav.home },
+  { href: '/about/', name: d.nav.about },
+  { href: '/loan-services/', name: d.nav.loans },
+  { href: '/saving-services/', name: d.nav.savings },
+  { href: '/financial-literacy-and-consultancy/', name: d.nav.training },
+  { href: '/articles/', name: d.nav.news },
+  { href: '/contact/', name: d.nav.contact },
 ];
 const active = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const L = (p: string) => u(lp(lang, p));
 ---
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <p class="topbar-license"><Icon name="shield" size={16} /> <span>{d.ui.licensed}</span><span class="topbar-no">{d.ui.licenseNo} {org.license}</span></p>
+    <div class="topbar-right">
+      <a href={`tel:${org.phones[0].tel}`}><Icon name="phone" size={15} /> {org.phones[0].display}</a>
+      <a class="lang-switch" href={u(lp(other, path === '/404/' ? '/' : path))} hreflang={other} lang={other} aria-label={d.ui.switchLabel}><Icon name="globe" size={15} /> {d.ui.switchTo}</a>
+    </div>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap bar">
-    <a href={u('/')} class="brand" aria-label={`${org.name}, home`}>
-      <Image src={logo} alt={`${org.name} logo`} width={220} height={60} loading="eager" fetchpriority="high" />
+    <a href={L('/')} class="brand" aria-label={`${d.brand}, ${d.nav.home}`}>
+      <Image src={logo} alt={`${org.name} logo`} width={220} height={60} loading="eager" />
     </a>
     <div class="menu">
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={d.nav.menuOpen} data-open={d.nav.menuOpen} data-close={d.nav.menuClose}><span></span><span></span><span></span></button>
       <nav id="main-nav" aria-label="Main">
         <ul>
-          {nav.map((n) => (
-            <li><a href={u(n.href)} aria-current={active(n.href) ? 'page' : undefined}>{n.name}</a></li>
-          ))}
+          {nav.map((n) => <li><a href={L(n.href)} aria-current={active(n.href) ? 'page' : undefined}>{n.name}</a></li>)}
         </ul>
-        <a class="btn btn-small" href={`tel:${org.phones[0].tel}`}>Call {org.phones[0].display}</a>
+        <a class="btn btn-sm" href={L('/contact/')}>{d.ui.applyLoan}</a>
       </nav>
     </div>
   </div>
   <script>
-    const b = document.querySelector('.menu-btn');
+    const b = document.querySelector<HTMLButtonElement>('.menu-btn');
     b?.addEventListener('click', () => {
       const open = b.getAttribute('aria-expanded') !== 'true';
       b.setAttribute('aria-expanded', String(open));
-      b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      b.setAttribute('aria-label', (open ? b.dataset.close : b.dataset.open) ?? '');
     });
   </script>
 </header>

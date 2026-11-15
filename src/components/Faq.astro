@@ -1,14 +1,29 @@
 ---
-import { faqs } from '../data/site';
+import Icon from './Icon.astro';
+import { org } from '../data/site';
+import { t, type Lang } from '../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
 ---
 <section class="section faq" aria-labelledby="faq-h">
-  <div class="wrap narrow">
-    <h2 id="faq-h">Frequently asked questions</h2>
-    {faqs.map((f) => (
-      <details>
-        <summary>{f.q}</summary>
-        <p>{f.a}</p>
-      </details>
-    ))}
+  <div class="wrap faq-grid">
+    <div>
+      <h2 id="faq-h">{d.faqH}</h2>
+      <div class="help-card">
+        <Icon name="phone" size={22} />
+        <div>
+          <p class="help-title">{d.home.ctaH}</p>
+          <a href={`tel:${org.phones[0].tel}`}>{org.phones[0].display}</a>
+        </div>
+      </div>
+    </div>
+    <div class="faq-list">
+      {d.faq.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
   </div>
 </section>

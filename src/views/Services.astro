@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import { services, loans, savings, literacy } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
+import { u, abs } from '../lib/url';
+
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const crumbs = [{ name: d.nav.services, path: '/services/' }];
+const groups = [
+  { list: loans, texts: d.products.loans },
+  { list: savings, texts: d.products.savings },
+  { list: literacy, texts: d.products.literacy },
+];
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: d.servicesPage.h1,
+  inLanguage: lang,
+  itemListElement: services.map((s, i) => ({ '@type': 'Offer', itemOffered: { '@type': 'FinancialProduct', name: d.services[i].name, description: d.services[i].text, url: abs(lp(lang, s.href), Astro.site) } })),
+}];
+---
+<Base lang={lang} title={d.meta.services.title} description={d.meta.services.description} path="/services/" crumbs={crumbs} schema={schema}>
+  <PageHero lang={lang} title={d.servicesPage.h1} intro={d.servicesPage.intro} crumbs={crumbs} />
+  <section class="section">
+    <div class="wrap">
+      {services.map((s, i) => (
+        <article class="svc-row">
+          <Image src={s.img} alt="" widths={[420, 700]} sizes="(min-width: 1000px) 42vw, 92vw" />
+          <div>
+            <span class="svc-icon"><Icon name={s.icon} size={22} /></span>
+            <h2>{d.services[i].name}</h2>
+            <p>{d.services[i].text}</p>
+            <ul class="chips">
+              {groups[i].list.map((p) => <li><a href={u(`${lp(lang, s.href)}#${p.slug}`)}>{(groups[i].texts as Record<string, { name: string }>)[p.slug].name}</a></li>)}
+            </ul>
+            <a class="btn" href={u(lp(lang, s.href))}>{d.services[i].cta}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CtaPanel lang={lang} title={d.servicesPage.ctaH} text={d.servicesPage.ctaText} />
+</Base>

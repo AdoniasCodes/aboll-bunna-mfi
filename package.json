@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "check:emdash": "python3 ../../scripts/check-emdash.py dist",
+    "zip": "sh scripts/package-cpanel.sh",
     "preview": "astro preview"
   },
   "pnpm": {

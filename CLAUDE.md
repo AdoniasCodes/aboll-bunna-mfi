@@ -9,5 +9,11 @@ Workspace rules (em dashes, pnpm, git identity, phone format) live in `/Users/ey
 - Amharic notices stay word for word as the client published them. Never rewrite or translate their body.
 - Brand colours come from the logo (roast brown, ochre bean, red arrows), not the old site's pink-red #DD183B.
 - Stats on the site come only from the Board's 2025/2026 annual report post. Do not inflate reported figures.
+- Bilingual: English at `/`, Amharic at `/am/`. Every string lives in `src/i18n/en.json` + `am.json` (same keys).
+  Amharic copy comes from Gemini (amharic role), never written by Claude. Notices are Amharic only; their
+  `/am/articles/...` URL is canonical for both language versions.
+- Type: Archivo (block, slightly expanded headings) + Noto Sans Ethiopic. Eyoel rejected Bricolage Grotesque/Mulish
+  (2026-11-15): wants a solid financial-institution look, clean and modern, no 3D.
+- Hosting: GitHub Pages preview only. NEVER Vercel. If the client buys, deliver a cPanel zip (`pnpm zip`).
 - GitHub Pages build is a preview: noindex + Disallow. The production build (no env) is indexable with canonical
   https://abollbunnamfi.com.

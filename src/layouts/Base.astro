@@ -2,24 +2,26 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { org, faqs } from '../data/site';
+import { org } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
 import { u, abs } from '../lib/url';
 
 interface Props {
+  lang: Lang;
   title: string;
   description: string;
-  path: string; // e.g. '/about/'
-  crumbs?: { name: string; path: string }[];
-  ogImage?: string;
+  path: string; // language-neutral, e.g. '/about/'
+  canonicalPath?: string; // full path override (already language-prefixed)
+  crumbs?: { name: string; path: string }[]; // language-neutral paths
   ogType?: 'website' | 'article';
-  lang?: string;
   schema?: object[];
   faq?: boolean;
 }
-const { title, description, path, crumbs = [], ogImage, ogType = 'website', lang = 'en', schema = [], faq = false } = Astro.props;
+const { lang, title, description, path, canonicalPath, crumbs = [], ogType = 'website', schema = [], faq = false } = Astro.props;
+const d = t(lang);
 const site = Astro.site;
-const canonical = abs(path, site);
-const image = ogImage ?? abs('/og-default.jpg', site);
+const canonical = abs(canonicalPath ?? lp(lang, path), site);
+const image = abs('/og-default.jpg', site);
 const noindex = import.meta.env.PUBLIC_NOINDEX === 'true';
 
 const orgLd = {
@@ -28,29 +30,25 @@ const orgLd = {
   '@id': abs('/#org', site),
   name: org.name,
   alternateName: [org.nameAm, 'Aboll Bunna MFI', 'Aboll Microfinance'],
-  slogan: org.tagline,
+  slogan: d.tagline,
   url: abs('/', site),
   logo: abs('/icon-512.png', site),
   image,
   email: org.email,
   telephone: org.phones[0].tel,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: `${org.address.line}, ${org.address.area}`,
-    addressLocality: org.address.city,
-    addressCountry: org.address.country,
-  },
+  address: { '@type': 'PostalAddress', streetAddress: `${d.org.addressLine}, ${d.org.addressArea}`, addressLocality: 'Addis Ababa', addressCountry: 'ET' },
   areaServed: ['Addis Ababa', 'Amhara Region', 'Ethiopia'],
   foundingDate: org.licenseDate,
   identifier: [{ '@type': 'PropertyValue', name: 'NBE microfinance license', value: org.license }],
+  availableLanguage: ['en', 'am'],
 };
 const ld: object[] = [orgLd, ...schema];
 if (crumbs.length) {
   ld.push({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({
-      '@type': 'ListItem', position: i + 1, name: c.name, item: abs(c.path, site),
+    itemListElement: [{ name: d.nav.breadcrumbHome, path: '/' }, ...crumbs].map((c, i) => ({
+      '@type': 'ListItem', position: i + 1, name: c.name, item: abs(lp(lang, c.path), site),
     })),
   });
 }
@@ -58,7 +56,8 @@ if (faq) {
   ld.push({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    inLanguage: lang,
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   });
 }
 ---
@@ -70,34 +69,36 @@ if (faq) {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {!canonicalPath && <>
+      <link rel="alternate" hreflang="en" href={abs(lp('en', path), site)} />
+      <link rel="alternate" hreflang="am" href={abs(lp('am', path), site)} />
+      <link rel="alternate" hreflang="x-default" href={abs(lp('en', path), site)} />
+    </>}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <meta name="theme-color" content="#3b1a0b" />
+    <meta name="theme-color" content="#2a1208" />
     <link rel="icon" type="image/png" href={u('/favicon.png')} />
     <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
     <link rel="sitemap" href={u('/sitemap-index.xml')} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:site_name" content={org.name} />
+    <meta property="og:site_name" content={d.brand} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
     <meta property="og:locale" content={lang === 'am' ? 'am_ET' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'am' ? 'en_US' : 'am_ET'} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Mulish:wght@400;700&family=Noto+Sans+Ethiopic:wght@400;700&display=swap"
-    />
-    <slot name="head" />
-    {ld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Noto+Sans+Ethiopic:wght@400..800&display=swap" />
+    {ld.map((x) => <script type="application/ld+json" set:html={JSON.stringify(x)} />)}
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
-    <Header path={path} />
+    <a class="skip" href="#main">{d.nav.skip}</a>
+    <Header lang={lang} path={path} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { org } from '../data/site';
+import { t, lp, type Lang } from '../i18n';
+import { u } from '../lib/url';
+interface Props { lang: Lang; title: string; text: string }
+const { lang, title, text } = Astro.props;
+const d = t(lang);
+---
+<section class="cta-wrap">
+  <div class="wrap">
+    <div class="cta-panel">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-gold" href={`tel:${org.phones[0].tel}`}><Icon name="phone" size={18} /> {d.ui.call} {org.phones[0].display}</a>
+        <a class="btn btn-outline-light" href={u(lp(lang, '/contact/'))}><Icon name="pin" size={18} /> {d.ui.findBranch}</a>
+      </div>
+    </div>
+  </div>
+</section>
