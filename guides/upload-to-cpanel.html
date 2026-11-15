@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Put the Aboll Bunna site on cPanel</title>
+<style>
+body{font:17px/1.6 system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;color:#1d1612}
+h1{color:#2a1208}h2{color:#7b3306;margin-top:32px}code{background:#f6f4f1;padding:2px 6px;border-radius:6px}
+pre{background:#2a1208;color:#fff;padding:14px;border-radius:10px;overflow-x:auto}
+.note{background:#fbf4e4;border-left:4px solid #c8951f;padding:12px 16px;border-radius:8px}
+li{margin-bottom:8px}
+</style></head><body>
+<h1>Put the Aboll Bunna site on cPanel</h1>
+<p>Do this only after the client says yes. It replaces their old WordPress site with the new one.</p>
+
+<h2>1. Make the zip</h2>
+<p>Open the Terminal app and paste this line, then press Enter:</p>
+<pre>cd /Users/eyoel/vibecoding/helper/aboll-bunna-mfi && pnpm zip</pre>
+<p>When it finishes it prints <code>Ready:</code> and a file path. That zip file is the whole website.</p>
+
+<h2>2. Back up the old site</h2>
+<ol>
+<li>Log in to their cPanel.</li>
+<li>Click <b>File Manager</b>, then open the <b>public_html</b> folder.</li>
+<li>Select everything, click <b>Compress</b>, and download that backup zip to your computer. Keep it.</li>
+<li>Now delete everything inside <b>public_html</b>.</li>
+</ol>
+
+<h2>3. Upload the new site</h2>
+<ol>
+<li>Still in <b>public_html</b>, click <b>Upload</b> and choose the zip from step 1.</li>
+<li>Go back, right-click the zip, click <b>Extract</b>, and extract into <b>public_html</b>.</li>
+<li>Delete the zip file from public_html.</li>
+<li>Open <b>abollbunnamfi.com</b> and <b>abollbunnamfi.com/am/</b> in your browser. Both should load.</li>
+</ol>
+
+<div class="note">The hidden file <code>.htaccess</code> must be in public_html. In File Manager, click
+<b>Settings</b> and tick <b>Show Hidden Files</b> to see it.</div>
+
+<h2>Questions for you</h2>
+<ol>
+<li>Should the contact form send to an inbox instead of opening the visitor's email app? <b>Recommended: yes, ask the client which email or Telegram they read every day.</b></li>
+<li>Can the client send real photos of their branches and staff? <b>Recommended: yes, real photos build more trust than stock ones.</b></li>
+</ol>
+</body></html>
